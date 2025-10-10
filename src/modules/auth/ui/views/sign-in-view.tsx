@@ -27,7 +27,7 @@ import {
 import { authClient } from '@/lib/auth-client'
 
 const formSchema = z.object({
-	email: z.string().email(),
+	email: z.email(),
 	password: z
 		.string()
 		.min(8, { message: 'Password must be at least 8 characters' })
@@ -156,7 +156,7 @@ export const SignInView = () => {
 								</Button>
 
 								<div className='relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border'>
-									<span className='relative z-10 bg-card px-2 text-muted-foreground'>Or continue with</span>
+									<span className='relative z-10 bg-card px-2 text-muted-foreground'>or continue with</span>
 								</div>
 
 								<div className='grid grid-cols-2 gap-4'>

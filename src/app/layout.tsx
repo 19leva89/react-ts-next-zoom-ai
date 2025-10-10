@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 import { NuqsAdapter } from 'nuqs/adapters/next'
+import { Analytics } from '@vercel/analytics/next'
 
 import { Toaster } from '@/components/ui'
 import { TRPCReactProvider } from '@/trpc/client'
@@ -21,11 +22,14 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<html lang='en'>
 			<body className={`${inter.className} antialiased`}>
-				<Toaster position='bottom-right' expand={false} richColors />
-
 				<NuqsAdapter>
 					<TRPCReactProvider>{children}</TRPCReactProvider>
 				</NuqsAdapter>
+
+				<Toaster position='bottom-right' expand={false} richColors />
+
+				{/* Allow track page views for Vercel */}
+				<Analytics />
 			</body>
 		</html>
 	)
