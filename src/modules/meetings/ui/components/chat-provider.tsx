@@ -1,6 +1,6 @@
 'use client'
 
-import { authClient } from '@/lib/auth-client'
+import { useSession } from '@/lib/auth-client'
 import { LoadingState } from '@/components/shared'
 import { ChatUI } from '@/modules/meetings/ui/components/chat-ui'
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const ChatProvider = ({ meetingId, meetingName }: Props) => {
-	const { data, isPending } = authClient.useSession()
+	const { data, isPending } = useSession()
 
 	if (isPending || !data?.user)
 		return <LoadingState title='Loading chat' description='Please wait while we load the chat' />

@@ -12,7 +12,7 @@ import {
 import { LogInIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui'
-import { authClient } from '@/lib/auth-client'
+import { useSession } from '@/lib/auth-client'
 import { generateAvatarUri } from '@/lib/avatar'
 
 import '@stream-io/video-react-sdk/dist/css/styles.css'
@@ -22,7 +22,7 @@ interface Props {
 }
 
 const DisabledVideoPreview = () => {
-	const { data } = authClient.useSession()
+	const { data } = useSession()
 
 	return (
 		<DefaultVideoPlaceholder

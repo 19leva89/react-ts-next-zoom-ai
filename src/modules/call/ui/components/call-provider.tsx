@@ -2,7 +2,7 @@
 
 import { LoaderIcon } from 'lucide-react'
 
-import { authClient } from '@/lib/auth-client'
+import { useSession } from '@/lib/auth-client'
 import { generateAvatarUri } from '@/lib/avatar'
 import { CallConnect } from '@/modules/call/ui/components/call-connect'
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const CallProvider = ({ meetingId, meetingName }: Props) => {
-	const { data, isPending } = authClient.useSession()
+	const { data, isPending } = useSession()
 
 	if (!data || isPending) {
 		return (

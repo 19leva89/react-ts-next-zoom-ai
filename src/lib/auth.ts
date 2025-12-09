@@ -1,6 +1,6 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { polar, checkout, portal } from '@polar-sh/better-auth'
+import { polar, checkout, portal, usage } from '@polar-sh/better-auth'
 
 import { db } from '@/db'
 import { user } from '@/db/schema/user'
@@ -16,10 +16,11 @@ export const auth = betterAuth({
 			createCustomerOnSignUp: true,
 			use: [
 				checkout({
-					authenticatedUsersOnly: true,
 					successUrl: '/upgrade',
+					authenticatedUsersOnly: true,
 				}),
 				portal(),
+				usage(),
 			],
 		}),
 	],

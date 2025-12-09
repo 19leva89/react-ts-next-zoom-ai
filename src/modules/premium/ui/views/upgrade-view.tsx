@@ -3,8 +3,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { useTRPC } from '@/trpc/client'
-import { authClient } from '@/lib/auth-client'
 import { ErrorState, LoadingState } from '@/components/shared'
+import { createCheckout, openCustomerPortal } from '@/actions/polar'
 import { PricingCard } from '@/modules/premium/ui/components/pricing-card'
 
 export const UpgradeView = () => {
@@ -27,14 +27,32 @@ export const UpgradeView = () => {
 						const isCurrentProduct = currentSubscription?.id === product.id
 
 						let buttonText = 'Upgrade'
-						let onClick = () => authClient.checkout({ products: [product.id] })
+						let onClick = async () => {
+							const result = await createCheckout([product.id])
+
+							if (result.success && result.data?.url) {
+								window.location.href = result.data.url
+							}
+						}
 
 						if (isCurrentProduct) {
 							buttonText = 'Manage'
-							onClick = () => authClient.customer.portal()
+							onClick = async () => {
+								const result = await openCustomerPortal()
+
+								if (result.success && result.data?.url) {
+									window.location.href = result.data.url
+								}
+							}
 						} else if (isPremium) {
 							buttonText = 'Change Plan'
-							onClick = () => authClient.customer.portal()
+							onClick = async () => {
+								const result = await openCustomerPortal()
+
+								if (result.success && result.data?.url) {
+									window.location.href = result.data.url
+								}
+							}
 						}
 
 						return (

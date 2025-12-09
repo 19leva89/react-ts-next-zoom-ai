@@ -19,15 +19,16 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui'
-import { authClient } from '@/lib/auth-client'
 import { useIsMobile } from '@/hooks/use-mobile'
+import { openCustomerPortal } from '@/actions/polar'
 import { GenerateAvatar } from '@/components/shared'
+import { authClient, useSession } from '@/lib/auth-client'
 
 export const DashboardUserButton = () => {
 	const router = useRouter()
 	const isMobile = useIsMobile()
 
-	const { data, isPending } = authClient.useSession()
+	const { data, isPending } = useSession()
 
 	if (isPending || !data?.user) {
 		return null
@@ -72,7 +73,16 @@ export const DashboardUserButton = () => {
 					</DrawerHeader>
 
 					<DrawerFooter>
-						<Button variant='outline' onClick={() => authClient.customer.portal()}>
+						<Button
+							variant='outline'
+							onClick={async () => {
+								const result = await openCustomerPortal()
+
+								if (result.success && result.data?.url) {
+									window.location.href = result.data.url
+								}
+							}}
+						>
 							<CreditCardIcon className='size-4 text-black' />
 							Billing
 						</Button>
@@ -118,7 +128,13 @@ export const DashboardUserButton = () => {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuItem
-					onClick={() => authClient.customer.portal()}
+					onClick={async () => {
+						const result = await openCustomerPortal()
+
+						if (result.success && result.data?.url) {
+							window.location.href = result.data.url
+						}
+					}}
 					className='flex cursor-pointer items-center justify-between'
 				>
 					Billing
