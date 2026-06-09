@@ -61,7 +61,9 @@ export const UpgradeView = () => {
 								variant={product.metadata.variant === 'highlighted' ? 'highlighted' : 'default'}
 								title={product.name}
 								price={product.prices[0].amountType === 'fixed' ? product.prices[0].priceAmount / 100 : 0}
-								priceSuffix={`/${product.prices[0].recurringInterval}`}
+								priceSuffix={
+									'recurringInterval' in product.prices[0] ? `/${product.prices[0].recurringInterval}` : ''
+								}
 								features={product.benefits.map((benefit) => benefit.description)}
 								buttonText={buttonText}
 								badge={product.metadata.badge as string | null}

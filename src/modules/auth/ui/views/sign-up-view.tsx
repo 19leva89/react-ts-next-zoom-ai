@@ -191,7 +191,7 @@ export const SignUpView = () => {
 
 								{!!error && (
 									<Alert className='border-none bg-destructive/10'>
-										<OctagonAlertIcon className='size-4 !text-destructive' />
+										<OctagonAlertIcon className='size-4 text-destructive!' />
 
 										<AlertTitle>{error}</AlertTitle>
 									</Alert>

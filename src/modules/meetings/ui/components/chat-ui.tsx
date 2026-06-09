@@ -1,7 +1,7 @@
 import {
 	Channel,
 	Chat,
-	MessageInput,
+	MessageComposer,
 	MessageList,
 	Thread,
 	useCreateChatClient,
@@ -14,7 +14,7 @@ import { Channel as StreamChannel } from 'stream-chat'
 import { useTRPC } from '@/trpc/client'
 import { LoadingState } from '@/components/shared'
 
-import 'stream-chat-react/dist/css/v2/index.css'
+import 'stream-chat-react/dist/css/index.css'
 
 interface Props {
 	meetingId: string
@@ -62,7 +62,7 @@ export const ChatUI = ({ meetingId, meetingName, userId, userName, userImage }: 
 							<MessageList />
 						</div>
 
-						<MessageInput />
+						<MessageComposer />
 					</Window>
 
 					<Thread />

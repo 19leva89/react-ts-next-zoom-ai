@@ -1,4 +1,8 @@
 ---
+trigger: always_on
+---
+
+---
 description: 
 globs: 
 alwaysApply: true
@@ -349,7 +353,3 @@ This guide is for tRPC v11, which requires:
 - @Official Documentation
 - @GitHub Repository
 - @Example Apps
-
-
-
-
