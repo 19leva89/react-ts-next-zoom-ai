@@ -10,7 +10,7 @@ import { session } from '@/db/schema/session'
 import { verification } from '@/db/schema/verification'
 
 export const auth = betterAuth({
-	trustedOrigins: ['http://localhost:3000', process.env.BETTER_AUTH_URL || ''],
+	trustedOrigins: ['*'],
 	plugins: [
 		polar({
 			client: polarClient,
